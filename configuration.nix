@@ -8,13 +8,10 @@
 
       # Auto upgrade nix package and the daemon service.
       services.nix-daemon.enable = true;
-      # nix.package = pkgs.nix;
 
       # Necessary for using flakes on this system.
       nix.settings.experimental-features = "nix-command flakes";
 
-      # Enable alternative shell support in nix-darwin.
-      # programs.fish.enable = true;
 
       # Set Git commit hash for darwin-version.
       system.configurationRevision = self.rev or self.dirtyRev or null;
@@ -39,9 +36,13 @@
       };
       system.defaults.NSGlobalDomain.NSWindowShouldDragOnGesture = true;
       system.defaults.screencapture.location = "~/Screenshots";
+      security.pam.enableSudoTouchIdAuth = true;
 
       homebrew = {
         enable = true;
+        brews = [
+          "pulumi"
+        ];
         casks = [
           "wezterm@nightly"
         ];
