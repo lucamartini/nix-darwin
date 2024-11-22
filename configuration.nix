@@ -12,7 +12,6 @@
   # Necessary for using flakes on this system.
   nix.settings.experimental-features = "nix-command flakes";
 
-
   # Set Git commit hash for darwin-version.
   system.configurationRevision = self.rev or self.dirtyRev or null;
 
@@ -40,6 +39,17 @@
 
   homebrew = {
     enable = true;
+    onActivation = {
+      autoUpdate = true;
+      upgrade = true;
+      cleanup = "zap";
+      extraFlags = [
+        "--verbose"
+      ];
+    };
+    global = {
+      autoUpdate = false;
+    };
     brews = [
       "pulumi"
     ];
