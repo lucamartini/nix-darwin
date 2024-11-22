@@ -17,14 +17,14 @@
       system = "aarch64-darwin";
       specialArgs = {inherit self;};
       modules = [ 
-        ./configuration.nix 
+        ./nix-darwin.nix 
         home-manager.darwinModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             users.users.lmartini.name = "lmartini";
             users.users.lmartini.home = /Users/lmartini;
-            home-manager.users.lmartini = import ./home.nix;
+            home-manager.users.lmartini = import ./home-manager.nix;
           }
       ];
     };
