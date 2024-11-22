@@ -67,7 +67,7 @@
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
-    ".tmux.conf".source = ./.tmux.conf;
+    ".tmux.conf".source = dotfiles/.tmux.conf;
 
     # # You can also set the file content immediately.
     # ".gradle/gradle.properties".text = ''
@@ -94,47 +94,6 @@
   #
   home.sessionVariables = {
     # EDITOR = "emacs";
-  };
-
-  
-
-  programs = {
-    tmux = {
-      enable = true;
-      # shell = "/bin/zsh";
-      prefix = "C-Space";
-      aggressiveResize = true;
-      baseIndex = 1;
-      escapeTime = 10;
-      historyLimit = 50000;
-      mouse = true;
-      terminal = "screen-256color";
-      extraConfig = ''
-        set-option -g default-shell /bin/zsh
-      '';
-      plugins = with pkgs; [
-        {    
-          plugin = tmuxPlugins.mode-indicator;
-          extraConfig = ''
-            set -g @mode_indicator_empty_prompt ' ◇ '
-            set -g @mode_indicator_empty_mode_style 'bg=term,fg=color2'
-            set -g @mode_indicator_prefix_prompt ' ◈ '
-            set -g @mode_indicator_prefix_mode_style 'bg=color2,fg=color0'
-            set -g @mode_indicator_copy_prompt '  '
-            set -g @mode_indicator_copy_mode_style 'bg=color3,fg=color0'
-            set -g @mode_indicator_sync_prompt ' 󰓦 '
-            set -g @mode_indicator_sync_mode_style 'bg=color1,fg=color0'
-          '';
-        }
-        tmuxPlugins.resurrect
-        {
-          plugin = tmuxPlugins.continuum;
-          extraConfig = ''
-            set -g @continuum-restore 'on'
-          '';
-        }
-      ];
-    };
   };
 
   # Let Home Manager install and manage itself.
